@@ -1,4 +1,4 @@
-package com.belezanaweb.api.model;
+package com.belezanaweb.api.model.output;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

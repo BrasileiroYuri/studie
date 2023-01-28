@@ -1,15 +1,17 @@
-package com.belezanaweb.api.model;
+package com.belezanaweb.api.model.output;
 
 import java.util.List;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class InventoryModel {
 	
 	@PositiveOrZero
@@ -19,5 +21,4 @@ public class InventoryModel {
 	@NotNull
 	private List<WarehouseModel> warehouses;
 	
-
 }

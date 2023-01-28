@@ -1,24 +1,13 @@
 package com.belezanaweb.api.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.belezanaweb.api.model.output.InventoryModel;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+public abstract class ProductModel {
 
-public class ProductModel {
+	public abstract InventoryModel getInventory();
 
-	@NotNull
-	private Long sku;
-	
-	@NotBlank
-	private String name;
-	
-	@Valid
-	@NotNull
-	private InventoryModel inventory;
-	
-	@JsonProperty(access = Access.READ_ONLY)
-	private Boolean isMarkeatable;
+	public abstract Long getSku();
+
+	public abstract String getName();
+
 }
