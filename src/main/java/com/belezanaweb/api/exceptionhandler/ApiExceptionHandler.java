@@ -10,13 +10,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.belezanaweb.domain.exception.ProductNotFoundException;
-import com.belezanaweb.domain.exception.SkuNotAllowedException;
+import com.belezanaweb.domain.exception.SkuAlreadyExistsException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(SkuNotAllowedException.class)
-	public ResponseEntity<?> handleSkuNotAllowed(SkuNotAllowedException ex, WebRequest request) {
+	@ExceptionHandler(SkuAlreadyExistsException.class)
+	public ResponseEntity<?> handleSkuNotAllowed(SkuAlreadyExistsException ex, WebRequest request) {
 		return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 

@@ -1,14 +1,14 @@
 package com.belezanaweb.domain.exception;
 
-public class SkuNotAllowedException extends RuntimeException {
+public class SkuAlreadyExistsException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public SkuNotAllowedException(String message) {
+	public SkuAlreadyExistsException(String message) {
 		super(message);
 	}
 
-	public SkuNotAllowedException(Long productSku) {
+	public SkuAlreadyExistsException(Long productSku) {
 		this(String.format("The product with id '%d' already exists!.", productSku));
 	}
 

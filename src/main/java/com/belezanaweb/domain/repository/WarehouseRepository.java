@@ -6,4 +6,8 @@ import com.belezanaweb.domain.model.Warehouse;
 
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
 
+
+
+
+
 }

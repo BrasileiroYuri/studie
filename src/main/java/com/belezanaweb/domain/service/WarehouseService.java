@@ -13,10 +13,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class WarehouseService {
 
-	private final WarehouseRepository warehouseRepository;
-
-	public void saveWarehouses(List<Warehouse> warehouses) {
-		warehouses.stream().map(warehouse -> warehouseRepository.save(warehouse));
-	}
+    private final WarehouseRepository warehouseRepository;
 
 }

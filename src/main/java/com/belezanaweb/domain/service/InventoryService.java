@@ -13,14 +13,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public final class InventoryService {
 
-	private final InventoryRepository inventoryRepository;
+    private final InventoryRepository inventoryRepository;
 
-	public void save(List<Inventory> inventories) {
-		for (Inventory inventory : inventories) {
-			if (!inventoryRepository.findAll().contains(inventory)) {
-				inventoryRepository.save(inventory);
-			}
-		}
-	}
+    public void save(List<Inventory> inventories) {
+        inventoryRepository.saveAll(inventories);
+    }
 
 }

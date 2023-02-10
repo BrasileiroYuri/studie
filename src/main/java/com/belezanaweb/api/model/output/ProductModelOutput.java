@@ -1,6 +1,5 @@
 package com.belezanaweb.api.model.output;
 
-import com.belezanaweb.api.model.ProductModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -9,24 +8,24 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Builder
-public class ProductModelOutput extends ProductModel{
+public class ProductModelOutput {
 
-	@NotNull
-	private Long sku;
+    @NotNull
+    private Long sku;
 
-	@NotBlank
-	private String name;
+    @NotBlank
+    private String name;
 
-	@Valid
-	@NotNull
-	private InventoryModel inventory;
+    @Valid
+    @NotNull
+    private InventoryModel inventory;
 
-	@JsonProperty(access = Access.READ_ONLY)
-	private Boolean isMarkeatable;
+    @JsonProperty(access = Access.READ_ONLY)
+    private Boolean isMarkeatable;
+
 }

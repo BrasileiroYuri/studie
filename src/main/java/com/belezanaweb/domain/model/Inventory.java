@@ -21,7 +21,7 @@ public class Inventory {
 	@OneToOne
 	private Product product;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.DETACH)
 	private Warehouse warehouse;
 
 }

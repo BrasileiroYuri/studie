@@ -1,39 +1,40 @@
 package com.belezanaweb.api.model.disassembler;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
-import com.belezanaweb.api.model.ProductModel;
+import com.belezanaweb.api.model.input.ProductModelInput;
+import com.belezanaweb.api.model.input.WarehouseModelInput;
 import com.belezanaweb.domain.model.Inventory;
 import com.belezanaweb.domain.model.Product;
-import com.belezanaweb.domain.model.Type;
-import com.belezanaweb.domain.model.Warehouse;
+import com.belezanaweb.domain.repository.WarehouseRepository;
+import com.belezanaweb.domain.service.ProductService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
-public final class ProductModelDisassembler {
+@AllArgsConstructor
+public class ProductModelDisassembler {
 
-	public Product toDomainModel(ProductModel productModel) {
-		Product product = new Product();
-		product.setSku(productModel.getSku());
-		product.setName(productModel.getName());
-		product.setQuantity(productModel.getInventory().getQuantity());
-		List<Inventory> inventories = getInventories(productModel, product);
-		product.setInventory(inventories);
-		return product;
-	}
+    private ProductService productService;
+    private WarehouseRepository warehouseRepository;
 
-	private List<Inventory> getInventories(ProductModel productModel, Product product) {
-		return productModel.getInventory().getWarehouses().stream().map(warehouse -> {
-			var inventory = new Inventory();
-			inventory.setProduct(product);
-			inventory.setQuantity(warehouse.getQuantity());
-			var newWarehouse = new Warehouse();
-			newWarehouse.setLocality(warehouse.getLocality());
-			newWarehouse.setType(Type.valueOf(warehouse.getType()));
-			inventory.setWarehouse(newWarehouse);
-			return inventory;
-		}).toList();
-	}
+    public Product toDomainModel(ProductModelInput productModelInput) {
+        var product = new Product();
+        product.setSku(productModelInput.getSku());
+        product.setName(productModelInput.getName());
+        product.setQuantity(productModelInput.getWarehouses().stream()
+                .mapToLong(WarehouseModelInput::getQuantity).sum());
+        List<Inventory> inventories =
+                productModelInput.getWarehouses().stream().map(warehouseModelInput -> {
+                    var inventory = new Inventory();
+                    inventory.setProduct(product);
+                    inventory.setQuantity(warehouseModelInput.getQuantity());
+                    inventory.setWarehouse(warehouseRepository.findById(warehouseModelInput.getId())
+                            .orElseThrow(() -> new RuntimeException()));
+                    return inventory;
+                }).toList();
+        product.setInventory(inventories);
+        return product;
+    }
 
 }
