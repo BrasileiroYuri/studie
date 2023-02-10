@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 @JsonInclude(Include.NON_NULL)
+@Builder
 public class ProblemDetails {
 
 	private Integer status;
