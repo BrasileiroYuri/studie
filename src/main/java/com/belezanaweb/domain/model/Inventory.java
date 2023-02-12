@@ -1,11 +1,6 @@
 package com.belezanaweb.domain.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -21,7 +16,7 @@ public class Inventory {
 	@OneToOne
 	private Product product;
 
-	@OneToOne(cascade = CascadeType.DETACH)
+	@OneToOne
 	private Warehouse warehouse;
 
 }

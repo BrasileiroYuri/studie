@@ -17,7 +17,7 @@ public final class ProductService {
     private final InventoryService inventoryService;
 
     public Product save(Product product) {
-        calculateQuantity(product);
+        product.calculateQuantity();
         productRepository.save(product);
         inventoryService.save(product.getInventory());
         return product;
@@ -35,10 +35,6 @@ public final class ProductService {
         productRepository.findById(sku).ifPresent(product -> {
             throw new SkuAlreadyExistsException(sku);
         });
-    }
-
-    public void calculateQuantity(Product product) {
-        product.setQuantity(product.getInventory().stream().mapToLong(inventory -> inventory.getQuantity()).sum());
     }
 
 }

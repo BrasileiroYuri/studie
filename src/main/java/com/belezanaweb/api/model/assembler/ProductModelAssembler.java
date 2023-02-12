@@ -1,15 +1,16 @@
 package com.belezanaweb.api.model.assembler;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import com.belezanaweb.api.model.output.InventoryModel;
 import com.belezanaweb.api.model.output.ProductModelOutput;
 import com.belezanaweb.api.model.output.WarehouseModel;
 import com.belezanaweb.domain.model.Product;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
+@AllArgsConstructor
 public final class ProductModelAssembler {
 
     public ProductModelOutput toModel(Product product) {
@@ -31,7 +32,7 @@ public final class ProductModelAssembler {
     }
 
     public List<ProductModelOutput> toCollectionModel(List<Product> products) {
-        return products.stream().map(product -> toModel(product)).toList();
+        return products.stream().map(this::toModel).toList();
     }
 
 }

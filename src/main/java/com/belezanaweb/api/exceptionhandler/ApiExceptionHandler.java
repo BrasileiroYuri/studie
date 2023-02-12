@@ -48,7 +48,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> handleSQLIntegrityCosntraintViolation
             (DataIntegrityViolationException ex, HttpHeaders httpHeaders, HttpStatus badRequest, WebRequest request) {
         var body = ProblemDetails.builder().status(badRequest.value())
-                .timeStamp(OffsetDateTime.now()).detail(ex.getMessage()).build();
+                .timeStamp(OffsetDateTime.now()).detail(ex.getLocalizedMessage()).build();
         return handleExceptionInternal(ex, body, httpHeaders, badRequest, request);
     }
 

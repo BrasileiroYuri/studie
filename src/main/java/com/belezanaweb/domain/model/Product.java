@@ -1,12 +1,12 @@
 package com.belezanaweb.domain.model;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -26,5 +26,7 @@ public class Product {
 	public boolean isMarkeatable() {
 		return getQuantity() > 0;
 	}
-
+	public void calculateQuantity() {
+		setQuantity(getInventory().stream().mapToLong(Inventory::getQuantity).sum());
+	}
 }
